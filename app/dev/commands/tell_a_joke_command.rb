@@ -14,6 +14,15 @@ class TellAJokeCommand < Liza::Command
 
     # log "puts render text.txt"
     # puts render "text.txt"
+    require 'httparty'
+
+    response = HTTParty.get('https://v2.jokeapi.dev/joke/Programming?format=txt')
+
+    if response.code == 200
+      log response.body
+    else
+      log "Error: #{response.code} #{response.message}"
+    end
 
     log "Time.now #{Time.now}"
   end
